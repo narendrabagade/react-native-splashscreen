@@ -92,29 +92,28 @@ public class RCTSplashScreen extends ReactContextBaseJavaModule {
     }
 
     private int getSplashId() {
-        if (getActivity() != null)
-        {
-        try{
-            int drawableId = getActivity().getResources().getIdentifier("splash", "drawable", getActivity().getClass().getPackage().getName());
-            final int orientationInt = getReactApplicationContext().getResources().getConfiguration().orientation;
-            if(orientationInt == 2){
-                drawableId = getActivity().getResources().getIdentifier("splash_land", "drawable", getActivity().getClass().getPackage().getName());
-            }
-            if (drawableId == 0) {
+        if (getActivity() != null) {
+            try {
+                int drawableId = getActivity().getResources().getIdentifier("splash", "drawable", getActivity().getClass().getPackage().getName());
+                final int orientationInt = getReactApplicationContext().getResources().getConfiguration().orientation;
                 if(orientationInt == 2){
-                    drawableId = getActivity().getResources().getIdentifier("splash_land", "drawable", getActivity().getPackageName());
-                } else {
-                    drawableId = getActivity().getResources().getIdentifier("splash", "drawable", getActivity().getPackageName());
+                    drawableId = getActivity().getResources().getIdentifier("splash_land", "drawable", getActivity().getClass().getPackage().getName());
                 }
+                if (drawableId == 0) {
+                    if(orientationInt == 2){
+                        drawableId = getActivity().getResources().getIdentifier("splash_land", "drawable", getActivity().getPackageName());
+                    } else {
+                        drawableId = getActivity().getResources().getIdentifier("splash", "drawable", getActivity().getPackageName());
+                    }
 
+                }
+                return drawableId;
+            } catch(Exception e){
+                return 0;
             }
-        } catch(Exception e){
-            return 0;
+        } else {
+             return 0;
         }
-         
-        return drawableId;
-        }
-        return 0;
     }
 
     private void showSplashScreen() {
