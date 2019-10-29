@@ -65,6 +65,10 @@ public class RCTSplashScreen extends ReactContextBaseJavaModule {
 
 
     private void removeSplashScreen() {
+        // here you check the value of getActivity() and break up if needed
+        if(getActivity() == null)
+            return;
+        
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 if (splashDialog != null && splashDialog.isShowing()) {
